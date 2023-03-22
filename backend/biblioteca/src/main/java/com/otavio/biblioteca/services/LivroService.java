@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.otavio.biblioteca.dto.LivroDTO;
 import com.otavio.biblioteca.entities.Livro;
 import com.otavio.biblioteca.repositories.LivroRepository;
+import com.otavio.biblioteca.services.exceptions.ResorceNotFoundException;
 
 @Service
 public class LivroService {
@@ -23,6 +24,21 @@ public class LivroService {
 		
 		return new LivroDTO(entity); //retorna o objeto
 		
+	}
+
+	@Transactional
+	public LivroDTO update(Long id, LivroDTO dto) {
+		try {
+			Livro entity = repository.getOne(id);
+			
+			entity.setNome(dto.getNome());
+			entity = repository.save(entity);
+			
+			return new LivroDTO(entity);
+			
+		} catch (Exception e) {
+			throw new ResorceNotFoundException("Id not found" + id);
+		}
 	}
 
 }
