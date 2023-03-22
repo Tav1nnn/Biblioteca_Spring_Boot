@@ -7,5 +7,5 @@ import com.otavio.biblioteca.entities.Livro;
 
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Long>{
-
+	
 }

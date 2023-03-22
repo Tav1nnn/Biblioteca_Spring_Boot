@@ -1,17 +1,17 @@
 package com.otavio.biblioteca.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
+import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,21 +22,36 @@ public class Livro implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NonNull
 	private String nome;
 	
-	@CreationTimestamp
-	private LocalDateTime createDataTime;
-	@UpdateTimestamp
-	private LocalDateTime updateDataTime;
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
+		
+	@PrePersist
+	protected void onCreate() {
+		createdAt = LocalDateTime.now();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = LocalDateTime.now();
+	}
 	
 	public Livro() {
 		
 	}
 
-	public Livro(Long id, String nome, Instant created_At) {
+	
+	
+	public Livro(Long id, String nome, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.nome = nome;
-		this.created_At = created_At;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public Long getId() {
@@ -55,12 +70,20 @@ public class Livro implements Serializable{
 		this.nome = nome;
 	}
 
-	public Instant getCreated_At() {
-		return created_At;
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreated_At(Instant created_At) {
-		this.created_At = created_At;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	@Override
