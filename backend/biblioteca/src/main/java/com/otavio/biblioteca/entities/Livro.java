@@ -44,8 +44,6 @@ public class Livro implements Serializable{
 	public Livro() {
 		
 	}
-
-	
 	
 	public Livro(Long id, String nome, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
@@ -102,6 +100,5 @@ public class Livro implements Serializable{
 		Livro other = (Livro) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 	
 }
