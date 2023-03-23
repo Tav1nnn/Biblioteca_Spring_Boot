@@ -1,0 +1,10 @@
+INSERT INTO livros (nome) VALUES ('The Great Gatsby');
+INSERT INTO livros (nome) VALUES ('To Kill a Mockingbird');
+INSERT INTO livros (nome) VALUES ('1984');
+INSERT INTO livros (nome) VALUES ('Animal Farm');
+INSERT INTO livros (nome) VALUES ('The Catcher in the Rye');
+INSERT INTO livros (nome) VALUES ('Lord of the Flies');
+INSERT INTO livros (nome) VALUES ('Brave New World');
+INSERT INTO livros (nome) VALUES ('The Hobbit');
+INSERT INTO livros (nome) VALUES ('The Lord of the Rings');
+INSERT INTO livros (nome) VALUES ('Pride and Prejudice');
