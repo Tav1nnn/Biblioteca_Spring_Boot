@@ -18,30 +18,33 @@ import jakarta.persistence.Table;
 @Table(name = "livros")
 public class Livro implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+	//Desenvolvedor | HTML, CSS, Javascript, Java | estudando Spring Boot | Padrão MVC, PWA
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@NonNull
 	private String nome;
 	
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
-
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 		
 	@PrePersist
 	protected void onCreate() {
 		createdAt = LocalDateTime.now();
+		
 	}
-
 	@PreUpdate
 	protected void onUpdate() {
 		updatedAt = LocalDateTime.now();
 	}
 	
+	
 	public Livro() {
+		this.createdAt = LocalDateTime.now();
+	    this.updatedAt = LocalDateTime.now();
 		
 	}
 	
@@ -51,6 +54,8 @@ public class Livro implements Serializable{
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
+	
+	
 
 	public Long getId() {
 		return id;

@@ -47,6 +47,8 @@ public class LivroService {
 			entity.setNome(dto.getNome());
 			entity = repository.save(entity);
 			
+			System.out.println("teste" + entity.getUpdatedAt());
+			
 			return new LivroDTO(entity);
 			
 		}catch (EntityNotFoundException e) {

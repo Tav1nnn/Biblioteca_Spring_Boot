@@ -49,7 +49,7 @@ public class LivroResource {
 	@GetMapping
 	public ResponseEntity<Page<LivroDTO>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+			@RequestParam(value = "linesPerPage", defaultValue = "5") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy
 			
