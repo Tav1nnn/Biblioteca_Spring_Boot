@@ -2,18 +2,14 @@ package com.otavio.biblioteca.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
+import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -26,9 +22,19 @@ public class Autor implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @NonNull
 	private String nome;
+    
+	@Column(unique = true)
+	@NonNull
 	private String email;
+	
+	@NonNull
 	private String numero;
+	
+	@Column(unique = true)
+	@NonNull
 	private int cpf;
 
 	@Column(name = "created_at")

@@ -101,6 +101,10 @@ public class Livro implements Serializable{
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	public Set<Autor> getAutores() {
+		return autores;
+	}
 
 	@Override
 	public int hashCode() {
