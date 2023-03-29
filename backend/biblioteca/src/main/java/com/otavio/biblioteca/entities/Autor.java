@@ -14,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,8 +36,19 @@ public class Autor implements Serializable{
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 	
-	public Autor() {
+	@PrePersist
+	protected void onCreate() {
+		createdAt = LocalDateTime.now();
 		
+	}
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = LocalDateTime.now();
+	}
+	
+	public Autor() {
+		this.createdAt = LocalDateTime.now();
+	    this.updatedAt = LocalDateTime.now();
 	}
 
 	public Autor(Long id, String nome, String email, String numero, int cpf, LocalDateTime createdAt,
@@ -48,15 +61,6 @@ public class Autor implements Serializable{
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
-
-	@ManyToMany
-	@JoinTable(
-		name = "autor_livro",
-		joinColumns = @JoinColumn(name = "autor_id"),
-		inverseJoinColumns = @JoinColumn(name = "livro_id")
-	)
-	
-	Set<Livro> livros = new HashSet<>();
 	
 	public String getNome() {
 		return nome;
@@ -116,11 +120,6 @@ public class Autor implements Serializable{
 		this.updatedAt = updatedAt;
 	}
 	
-	
-
-	public Set<Livro> getLivros() {
-		return livros;
-	}
 
 	@Override
 	public int hashCode() {

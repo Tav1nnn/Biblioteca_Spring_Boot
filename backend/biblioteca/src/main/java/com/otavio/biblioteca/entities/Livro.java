@@ -2,7 +2,9 @@ package com.otavio.biblioteca.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
@@ -10,6 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -41,6 +46,14 @@ public class Livro implements Serializable{
 		updatedAt = LocalDateTime.now();
 	}
 	
+	@ManyToMany
+	@JoinTable(
+		name = "livro_autor",
+		joinColumns = @JoinColumn(name = "livro_id"),
+		inverseJoinColumns = @JoinColumn(name = "autor_id")
+	)
+	
+	Set<Autor> autores = new HashSet<>();
 	
 	public Livro() {
 		this.createdAt = LocalDateTime.now();

@@ -22,7 +22,7 @@ import com.otavio.biblioteca.dto.LivroDTO;
 import com.otavio.biblioteca.services.LivroService;
 
 @RestController
-@RequestMapping(value = "/livros")
+@RequestMapping(value = "/biblioteca/livros")
 public class LivroResource {
 	
 	@Autowired
