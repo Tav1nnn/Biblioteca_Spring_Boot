@@ -2,6 +2,8 @@ package com.otavio.biblioteca.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.otavio.biblioteca.entities.Livro;
 
@@ -13,6 +15,8 @@ public class LivroDTO implements Serializable{
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
+	private List<AutorDTO> autores = new ArrayList<>();
+
 	public LivroDTO () {
 		
 	}
@@ -31,6 +35,8 @@ public class LivroDTO implements Serializable{
 		this.createdAt = entity.getCreatedAt();
 		this.updatedAt = entity.getUpdatedAt();
 	}
+	
+	
 
 	public long getId() {
 		return id;
@@ -64,4 +70,7 @@ public class LivroDTO implements Serializable{
 		this.updatedAt = updatedAt;
 	}
 	
+	public List<AutorDTO> getAutores() {
+		return autores;
+	}
 }

@@ -23,6 +23,7 @@ import jakarta.persistence.Table;
 @Table(name = "livros")
 public class Livro implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
 	//Desenvolvedor | HTML, CSS, Javascript, Java | estudando Spring Boot | Padrão MVC, PWA
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
