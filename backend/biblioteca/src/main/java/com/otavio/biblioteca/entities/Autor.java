@@ -33,9 +33,8 @@ public class Autor implements Serializable{
 	@NonNull
 	private String numero;
 	
-	@Column(unique = true)
 	@NonNull
-	private int cpf;
+	private String cpf;
 
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
@@ -57,7 +56,7 @@ public class Autor implements Serializable{
 	    this.updatedAt = LocalDateTime.now();
 	}
 
-	public Autor(Long id, String nome, String email, String numero, int cpf, LocalDateTime createdAt,
+	public Autor(Long id, String nome, String email, String numero, String cpf, LocalDateTime createdAt,
 			LocalDateTime updatedAt) {
 		this.id = id;
 		this.nome = nome;
@@ -102,11 +101,11 @@ public class Autor implements Serializable{
 		this.id = id;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

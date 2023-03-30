@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import com.otavio.biblioteca.entities.Autor;
 import com.otavio.biblioteca.entities.Livro;
 
 public class LivroDTO implements Serializable{
@@ -36,7 +38,10 @@ public class LivroDTO implements Serializable{
 		this.updatedAt = entity.getUpdatedAt();
 	}
 	
-	
+	public LivroDTO(Livro entity, Set<Autor> autores){
+        this(entity);
+        	autores.forEach(cat -> this.autores.add(new AutorDTO(cat)));
+    }
 
 	public long getId() {
 		return id;

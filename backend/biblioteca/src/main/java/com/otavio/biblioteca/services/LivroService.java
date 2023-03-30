@@ -10,8 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.otavio.biblioteca.dto.AutorDTO;
 import com.otavio.biblioteca.dto.LivroDTO;
+import com.otavio.biblioteca.entities.Autor;
 import com.otavio.biblioteca.entities.Livro;
+import com.otavio.biblioteca.repositories.AutorRepository;
 import com.otavio.biblioteca.repositories.LivroRepository;
 import com.otavio.biblioteca.services.exceptions.DatabaseException;
 import com.otavio.biblioteca.services.exceptions.ResorceNotFoundException;
@@ -23,16 +26,29 @@ public class LivroService {
 	
 	@Autowired
 	private LivroRepository repository;
+	@Autowired
+	private AutorRepository autorRepository;
 	
 	@Transactional
 	public LivroDTO insert(LivroDTO dto) {
 		Livro entity = new Livro(); //cria objeto livro
+		copyDtoToEntity(dto, entity);
+		
+		entity = repository.save(entity);
+		
+		return new LivroDTO(entity,  entity.getAutores());
+		
+	}
+
+	private void copyDtoToEntity(LivroDTO dto, Livro entity) {
+		// TODO Auto-generated method stub
 		entity.setNome(dto.getNome());//pega o nome do dtp
+		entity.getAutores().clear();
 		
-		entity = repository.save(entity);//sava no banco
-		
-		return new LivroDTO(entity); //retorna o objeto
-		
+		for(AutorDTO autordto : dto.getAutores()) {
+			Autor autor = autorRepository.getOne(autordto.getId());
+			entity.getAutores().add(autor);
+		}
 	}
 
 	@Transactional
@@ -73,7 +89,7 @@ public class LivroService {
 		
 		Livro entity = obj.orElseThrow(()-> new ResorceNotFoundException("Entity not found"));
 		
-		return new LivroDTO(entity);
+		return new LivroDTO(entity, entity.getAutores());
 	}
 
 	public void delete(Long id) {

@@ -12,7 +12,7 @@ public class AutorDTO implements Serializable{
 	private String nome;
 	private String email;
 	private String numero;
-	private int cpf;
+	private String cpf;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
@@ -20,7 +20,7 @@ public class AutorDTO implements Serializable{
 		super();
 	}
 	
-	public AutorDTO(Long id, String nome, String email, String numero, int cpf, LocalDateTime createdAt,
+	public AutorDTO(Long id, String nome, String email, String numero, String cpf, LocalDateTime createdAt,
 			LocalDateTime updatedAt) {
 		this.id = id;
 		this.nome = nome;
@@ -65,10 +65,10 @@ public class AutorDTO implements Serializable{
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	public LocalDateTime getCreatedAt() {
